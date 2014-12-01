@@ -36,6 +36,7 @@ stopd() {
       start-stop-daemon -o -c $stuser -K -u $stuser -x $DAEMON
     fi
   done
+  killall syncthing
 }
 
 status() {
@@ -57,6 +58,9 @@ case "$1" in
   restart|reload|force-reload) stopd && startd
     ;;
   status) status
+    ;;
+  watchdog)
+    pidof syncthing >/dev/null || /etc/init.d/syncthing restart
     ;;
   *) echo "Usage: /etc/init.d/syncthing {start|stop|reload|force-reload|restart|status}"
      exit 1
