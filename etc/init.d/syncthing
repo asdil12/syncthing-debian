@@ -11,6 +11,8 @@
 # Description: Starts the syncthing daemon for all registered users.
 ### END INIT INFO
 
+trap "" 15
+
 # Replace with users you want to run syncthing clients for
 syncthing_USERS="pi"
 DAEMON=/usr/local/bin/st
